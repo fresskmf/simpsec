@@ -7,10 +7,10 @@ description = "SimpSec website"
 "wasmer/static-web-server" = "1"
 
 [fs]
-public = "public"
+"/public" = "public"
 
 [[command]]
 name = "serve"
-module = "static-web-server"
+module = "wasmer/static-web-server:static-web-server"
 runner = "wasi"
 args = ["--root", "/public", "--port", "8080"]
