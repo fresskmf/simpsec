@@ -6,8 +6,9 @@ description = "SimpSec website"
 [dependencies]
 "wasmer/static-web-server" = "1"
 
-[fs]
-public = "public"
+[[fs]]
+from = "public"
+to = "/public"
 
 [[command]]
 name = "serve"

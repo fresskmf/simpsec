@@ -2,7 +2,9 @@ kind: wasmer.io/App.v0
 owner: simpsec
 name: simpsec
 package: .
-# (optional)
 description: SimpSec website
+
+entrypoint: serve
+
 redirect:
   force_https: true
