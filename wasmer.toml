@@ -3,6 +3,14 @@ name = "simpsec"
 version = "0.1.0"
 description = "SimpSec website"
 
-# This tells Wasmer what gets published from this folder.
+[dependencies]
+"wasmer/static-web-server" = "1"
+
 [fs]
-"/" = "."
+public = "public"
+
+[[command]]
+name = "serve"
+module = "static-web-server"
+runner = "wasi"
+args = ["--root", "/public", "--port", "8080"]
