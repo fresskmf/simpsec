@@ -15,9 +15,10 @@ jobs:
       - name: Install Wasmer
         run: curl https://get.wasmer.io -sSfL | sh
 
-      - name: Deploy
+      - name: Deploy to Wasmer
         env:
           WASMER_TOKEN: ${{ secrets.WASMER_TOKEN }}
         run: |
           export PATH="$HOME/.wasmer/bin:$PATH"
+          cd Site
           wasmer deploy --owner simpsec --non-interactive
