@@ -20,5 +20,4 @@ jobs:
           WASMER_TOKEN: ${{ secrets.WASMER_TOKEN }}
         run: |
           export PATH="$HOME/.wasmer/bin:$PATH"
-          cd Site
           wasmer deploy --owner simpsec --non-interactive
