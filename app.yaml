@@ -1,4 +1,7 @@
-name: simpsec/simpsec
+package:
+  name: simpsec
+  owner: simpsec
+  version: 0.1.0
 
 static:
   dir: .
