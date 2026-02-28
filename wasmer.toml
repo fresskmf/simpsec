@@ -1,0 +1,8 @@
+[package]
+name = "simpsec-site"
+version = "0.1.0"
+description = "SimpSec website"
+
+# This tells Wasmer what gets published from this folder.
+[fs]
+"/" = "."
