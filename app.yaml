@@ -1,4 +1,4 @@
-name: simpsec
+name: simpsec/simpsec
 
 static:
   dir: .
