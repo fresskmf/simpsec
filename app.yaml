@@ -1,9 +1,8 @@
-name: simpsec
-
-package:
+app:
   name: simpsec
   owner: simpsec
-  version: 0.1.0
 
-static:
-  dir: .
+  kind: static
+
+  static:
+    dir: .
