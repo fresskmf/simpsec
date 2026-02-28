@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://simpsec.wasmer.app/sitemap.xml

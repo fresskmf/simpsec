@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!--<< Header Area >>-->
+
+  <head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="namespace-it" />
+    <meta
+      name="description"
+      content="SimpSec helps small businesses with cybersecurity, AI automation, IT support, and strategic consulting—simple, modern solutions that keep your company secure and efficient."
+    />
+    <!-- ======== Page title ============ -->
+    <title>SIMPSEC - Smarter Systems, Safer Business</title>
+    <!--<< Favcion >>-->
+    <link rel="shortcut icon" href="assets/img/favicon.svg" />
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!--<< All Min Css >>-->
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="assets/css/meanmenu.css" />
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="assets/css/nice-select.css" />
+    <!--<< Color.css >>-->
+    <link rel="stylesheet" href="assets/css/color.css" />
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Only run on pages that have the FAQ wrapper
+        const faqWrapper = document.querySelector('.faq-wrapper.style-inner-page');
+        if (!faqWrapper) return;
+
+        // Sidebar search input in your FAQ template
+        const searchInput = faqWrapper.querySelector(
+          ".faq-sidebar .search-widget input[type='text']"
+        );
+        const searchForm = faqWrapper.querySelector('.faq-sidebar .search-widget form');
+        if (!searchInput) return;
+
+        // All FAQ accordion items on the page (across all accordions)
+        const items = Array.from(faqWrapper.querySelectorAll('.accordion-item'));
+
+        // Optional "no results" message
+        let noResults = faqWrapper.querySelector('.faq-no-results');
+        if (!noResults) {
+          noResults = document.createElement('div');
+          noResults.className = 'faq-no-results';
+          noResults.style.display = 'none';
+          noResults.style.marginTop = '20px';
+          noResults.style.color = 'var(--white)';
+          noResults.textContent = 'No matching questions found. Try a different keyword.';
+          // Put it at the top of the FAQ content area
+          const faqContent = faqWrapper.querySelector('.faq-content');
+          if (faqContent) faqContent.insertBefore(noResults, faqContent.firstChild);
+        }
+
+        // Prevent submit from reloading page
+        if (searchForm) {
+          searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+          });
+        }
+
+        function normalize(str) {
+          return (str || '').toLowerCase().replace(/\s+/g, ' ').trim();
+        }
+
+        function filterFaq(query) {
+          const q = normalize(query);
+          let visibleCount = 0;
+
+          items.forEach((item) => {
+            const btn = item.querySelector('.accordion-button');
+            const body = item.querySelector('.accordion-body');
+
+            const questionText = normalize(btn ? btn.textContent : '');
+            const answerText = normalize(body ? body.textContent : '');
+            const matches = !q || questionText.includes(q) || answerText.includes(q);
+
+            item.style.display = matches ? '' : 'none';
+            if (matches) visibleCount++;
+          });
+
+          noResults.style.display = visibleCount === 0 ? '' : 'none';
+        }
+
+        // Filter live as the user types
+        searchInput.addEventListener('input', function () {
+          filterFaq(searchInput.value);
+        });
+
+        // Optional: support pressing Escape to clear
+        searchInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') {
+            searchInput.value = '';
+            filterFaq('');
+          }
+        });
+      });
+    </script>
+  </head>
+
+  <body class="body-bg">
+    <!-- Preloader Start -->
+    <div id="preloader" class="preloader">
+      <div class="animation-preloader">
+        <div class="spinner"></div>
+        <div class="txt-loading">
+          <span data-text-preloader="S" class="letters-loading"> S </span>
+          <span data-text-preloader="I" class="letters-loading"> I </span>
+          <span data-text-preloader="M" class="letters-loading"> M </span>
+          <span data-text-preloader="P" class="letters-loading"> P </span>
+          <span data-text-preloader="S" class="letters-loading"> S </span>
+          <span data-text-preloader="E" class="letters-loading"> E </span>
+          <span data-text-preloader="C" class="letters-loading"> C </span>
+        </div>
+        <p class="text-center">Loading</p>
+      </div>
+      <div class="loader">
+        <div class="row">
+          <div class="col-3 loader-section section-left">
+            <div class="bg"></div>
+          </div>
+          <div class="col-3 loader-section section-left">
+            <div class="bg"></div>
+          </div>
+          <div class="col-3 loader-section section-right">
+            <div class="bg"></div>
+          </div>
+          <div class="col-3 loader-section section-right">
+            <div class="bg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<< Mouse Cursor Start >>-->
+    <div class="mouse-cursor cursor-outer"></div>
+    <div class="mouse-cursor cursor-inner"></div>
+
+    <!-- Back To Top start -->
+    <button id="back-top" class="back-to-top">
+      <i class="fa-regular fa-arrow-up"></i>
+    </button>
+
+        <div id="site-header"></div>
+<!-- Faq Section Start -->
+    <section
+      class="faq-section fix style-padding section-padding bg-cover"
+      style="background-image: url('assets/img/service/Pattern.png')"
+    >
+      <div class="container">
+        <div class="faq-banner">
+          <div class="section-title text-center">
+            <h6><img src="assets/img/star.png" alt="img" /> general FAQ</h6>
+            <h2>
+              Questions are our <span><b>speciality!</b></span>
+            </h2>
+          </div>
+          <div class="faq-image-banner">
+            <img src="assets/img/faq/04.jpg" alt="img" />
+          </div>
+        </div>
+        <div class="faq-wrapper style-inner-page">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="faq-sidebar">
+                <div class="search-widget">
+                  <form action="#">
+                    <input type="text" placeholder="Search keyword..." />
+                    <button type="submit">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </form>
+                </div>
+                <div class="contact-info-box">
+                  <div class="icon">
+                    <i class="fa-regular fa-phone-volume"></i>
+                  </div>
+                  <h2>
+                    Can't find an answer?
+                    <span>contact</span> us
+                  </h2>
+                  <a href="contact.html" class="theme-btn"
+                    >contact us <i class="fa-sharp fa-regular fa-arrow-up-right"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="faq-content">
+                <h2>General questions</h2>
+                <div class="faq-accordion">
+                  <div class="accordion" id="accordion1">
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingGeneral1">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqGeneral1"
+                          aria-expanded="false"
+                          aria-controls="faqGeneral1"
+                        >
+                          Are consultations really free?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqGeneral1"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingGeneral1"
+                        data-bs-parent="#accordion1"
+                      >
+                        <div class="accordion-body">
+                          Yes, the initial consultation is always free, no strings attached at all.
+                          It’s a chance to see if we’re a good fit for each other.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingGeneral2">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqGeneral2"
+                          aria-expanded="false"
+                          aria-controls="faqGeneral2"
+                        >
+                          How does pricing work?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqGeneral2"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingGeneral2"
+                        data-bs-parent="#accordion1"
+                      >
+                        <div class="accordion-body">
+                          Pricing is based on your contract scope; one-off projects, ongoing MSA
+                          plans, or a combination. We’ll help you choose what makes the most sense
+                          for your situation.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingGeneral3">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqGeneral3"
+                          aria-expanded="false"
+                          aria-controls="faqGeneral3"
+                        >
+                          Can I change or adjust my plan later?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqGeneral3"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingGeneral3"
+                        data-bs-parent="#accordion1"
+                      >
+                        <div class="accordion-body">
+                          Yes, you can upgrade, downgrade, or switch to a different engagement model
+                          anytime. No long-term commitments unless your contract specifies
+                          otherwise.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingGeneral4">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqGeneral4"
+                          aria-expanded="false"
+                          aria-controls="faqGeneral4"
+                        >
+                          Do you offer simple one-time projects?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqGeneral4"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingGeneral4"
+                        data-bs-parent="#accordion1"
+                      >
+                        <div class="accordion-body">
+                          Yes, you don’t need a long-term contract. We handle stand-alone tasks like
+                          audits, automations, migrations, security fixes, and one-off
+                          implementations.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingGeneral5">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqGeneral5"
+                          aria-expanded="false"
+                          aria-controls="faqGeneral5"
+                        >
+                          How do we get started?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqGeneral5"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingGeneral5"
+                        data-bs-parent="#accordion1"
+                      >
+                        <div class="accordion-body">
+                          Usually with a quick call to review your needs so we can make a
+                          recommendation outlining a one-time project or an ongoing MSA.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingGeneral6">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqGeneral6"
+                          aria-expanded="false"
+                          aria-controls="faqGeneral6"
+                        >
+                          What size businesses do you work with?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqGeneral6"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingGeneral6"
+                        data-bs-parent="#accordion1"
+                      >
+                        <div class="accordion-body">
+                          Everyone from brand-new startups with no systems in place to established
+                          teams that need outside experts for specialized projects.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <h2 class="mb-3 mt-5">Cybersecurity</h2>
+                <div class="faq-accordion">
+                  <div class="accordion" id="accordion2">
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber1">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber1"
+                          aria-expanded="false"
+                          aria-controls="faqCyber1"
+                        >
+                          What’s included in a cybersecurity audit?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber1"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber1"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          We review your systems for outdated software, weak passwords, exposed
+                          data, website vulnerabilities, policy gaps, and other risks. You get a
+                          clear, prioritized report with actionable recommendations.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber2">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber2"
+                          aria-expanded="false"
+                          aria-controls="faqCyber2"
+                        >
+                          Do I need to be tech-savvy to understand my audit results?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber2"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber2"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          No, everything is explained in everyday language with simple visuals and
+                          clear steps.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber3">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber3"
+                          aria-expanded="false"
+                          aria-controls="faqCyber3"
+                        >
+                          Is this a one-time service or ongoing protection?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber3"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber3"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          Either, you can hire us for a one-time engagement or choose an ongoing MSA
+                          for continuous monitoring, support, and security management.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber4">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber4"
+                          aria-expanded="false"
+                          aria-controls="faqCyber4"
+                        >
+                          How long does an audit take?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber4"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber4"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          Most audits are completed within a few days, depending on your environment
+                          and access.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber5">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber5"
+                          aria-expanded="false"
+                          aria-controls="faqCyber5"
+                        >
+                          How do I know if my business is at risk?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber5"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber5"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          Most small businesses are, especially those without dedicated IT staff.
+                          Even basic improvements significantly reduce risk.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber6">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber6"
+                          aria-expanded="false"
+                          aria-controls="faqCyber6"
+                        >
+                          What happens after the audit?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber6"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber6"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          We provide recommendations, help you plan next steps, and can implement
+                          fixes for you either as a project or through an ongoing contract.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber7">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber7"
+                          aria-expanded="false"
+                          aria-controls="faqCyber7"
+                        >
+                          Do you help with compliance (HIPAA, PCI, etc.)?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber7"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber7"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          Yes, we guide you through requirements and help build the protections
+                          needed to stay compliant.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingCyber8">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqCyber8"
+                          aria-expanded="false"
+                          aria-controls="faqCyber8"
+                        >
+                          Is my data safe during the audit?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqCyber8"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingCyber8"
+                        data-bs-parent="#accordion2"
+                      >
+                        <div class="accordion-body">
+                          Absolutely. We follow strict security practices and only access what’s
+                          required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h2 class="mb-3 mt-5">AI &amp; Automations</h2>
+                <div class="faq-accordion">
+                  <div class="accordion" id="accordion3">
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingAi1">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqAi1"
+                          aria-expanded="false"
+                          aria-controls="faqAi1"
+                        >
+                          What is "Prompting" or “prompt engineering”?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqAi1"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingAi1"
+                        data-bs-parent="#accordion3"
+                      >
+                        <div class="accordion-body">
+                          It’s crafting clear instructions for AI tools so they produce accurate,
+                          consistent results; whether you need customer replies, content, summaries,
+                          or internal workflows.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingAi2">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqAi2"
+                          aria-expanded="false"
+                          aria-controls="faqAi2"
+                        >
+                          I don’t understand AI, can you still help me?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqAi2"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingAi2"
+                        data-bs-parent="#accordion3"
+                      >
+                        <div class="accordion-body">
+                          Definitely. We set up everything and teach you how to use it with
+                          confidence.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingAi3">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqAi3"
+                          aria-expanded="false"
+                          aria-controls="faqAi3"
+                        >
+                          Can AI help my business?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqAi3"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingAi3"
+                        data-bs-parent="#accordion3"
+                      >
+                        <div class="accordion-body">
+                          Yes. AI can assist with customer support, messaging, data entry, lead
+                          qualification, content generation, and much more.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingAi4">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqAi4"
+                          aria-expanded="false"
+                          aria-controls="faqAi4"
+                        >
+                          What can a chatbot do for my business?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqAi4"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingAi4"
+                        data-bs-parent="#accordion3"
+                      >
+                        <div class="accordion-body">
+                          It can answer FAQs, collect leads, route requests, or provide basic
+                          support 24/7. Great for businesses without a full support team.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingAi5">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqAi5"
+                          aria-expanded="false"
+                          aria-controls="faqAi5"
+                        >
+                          Do you help set up automations?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqAi5"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingAi5"
+                        data-bs-parent="#accordion3"
+                      >
+                        <div class="accordion-body">
+                          Yes, automation is one of our core specialties. We design and implement
+                          systems that streamline repetitive tasks, reduce errors, and save time.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingAi6">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqAi6"
+                          aria-expanded="false"
+                          aria-controls="faqAi6"
+                        >
+                          Is AI safe for customer data?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqAi6"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingAi6"
+                        data-bs-parent="#accordion3"
+                      >
+                        <div class="accordion-body">
+                          We help you set up AI safely and ensure you’re using tools that protect
+                          sensitive information.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <h2 class="mb-3 mt-5">Tech Support &amp; Implementation</h2>
+                <div class="faq-accordion">
+                  <div class="accordion" id="accordion4">
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech1">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport1"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport1"
+                        >
+                          What’s included in your service?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport1"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech1"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          We offer cybersecurity monitoring, systems automations, technical support,
+                          cloud configuration, new system setup, and general consulting — tailored
+                          to your contract or project scope.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech2">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport2"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport2"
+                        >
+                          Do I need to install anything?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport2"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech2"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          Usually not. Most of our solutions run in the cloud. If anything needs
+                          setup, we handle it for you.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech3">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport3"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport3"
+                        >
+                          Do you only work with businesses that already have IT systems?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport3"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech3"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          No. We serve both ends (and everything in between):<br />
+                          • Businesses starting from zero with no tech foundation<br />
+                          • Established companies that need expert help with specific projects
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech4">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport4"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport4"
+                        >
+                          Do you help with new computer setups or migrations?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport4"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech4"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          Yes, we handle device setup, account creation, data transfers, and secure
+                          configurations.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech5">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport5"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport5"
+                        >
+                          What if I already have internal IT or another provider?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport5"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech5"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          We can work alongside your team as consultants for specialized projects or
+                          overflow support.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech6">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport6"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport6"
+                        >
+                          Do you offer emergency support?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport6"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech6"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          Yes. Urgent issues like malware, lockouts, outages, and system failures
+                          get immediate attention.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech7">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport7"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport7"
+                        >
+                          How does your ticketing system work?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport7"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech7"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          We use a queue categorized by contract priority.
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="accordion-item">
+                      <h5 class="accordion-header" id="headingTech8">
+                        <button
+                          class="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#faqTechSupport8"
+                          aria-expanded="false"
+                          aria-controls="faqTechSupport8"
+                        >
+                          How fast can I get help?
+                        </button>
+                      </h5>
+                      <div
+                        id="faqTechSupport8"
+                        class="accordion-collapse collapse"
+                        aria-labelledby="headingTech8"
+                        data-bs-parent="#accordion4"
+                      >
+                        <div class="accordion-body">
+                          Response time depends on your contract tier and ticket priority. Priority
+                          support can guarantee faster response.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cta Discuss Section Start -->
+    <section
+      class="cta-discuss-section fix section-padding bg-cover"
+      style="background-image: url('assets/img/cta-discuss-bg.jpg')"
+    >
+      <div class="container">
+        <div class="cta-discuss-content">
+          <h2>
+            Let’s discuss how we <br />
+            <span>support <b>your</b> next vision</span>
+          </h2>
+          <p>Your ideas deserve clarity and a path forward. Its time to get started!</p>
+          <a href="inquiry.html" class="theme-btn"
+            >contact us <i class="fa-sharp fa-regular fa-arrow-up-right"></i
+          ></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section Start -->
+        <div id="site-footer"></div>
+<!--<< All JS Plugins >>-->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!--<< Viewport Js >>-->
+    <script src="assets/js/viewport.jquery.js"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!--<< Nice Select Js >>-->
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <!--<< Waypoints Js >>-->
+    <script src="assets/js/jquery.waypoints.js"></script>
+    <!--<< Counterup Js >>-->
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <!--<< MeanMenu Js >>-->
+    <script src="assets/js/jquery.meanmenu.min.js"></script>
+    <!--<< Magnific Popup Js >>-->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!--<< Wow Animation Js >>-->
+    <script src="assets/js/wow.min.js"></script>
+    <!--<< Main.js >>-->
+    <script src="/assets/js/includes.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

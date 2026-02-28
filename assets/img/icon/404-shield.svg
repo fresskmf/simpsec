@@ -1,0 +1,160 @@
+<svg
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+  focusable="false"
+  role="img"
+>
+  <defs>
+    <!-- -------------------------------------------------------
+      Fallback brand variables (in case CSS vars aren’t inherited)
+      ------------------------------------------------------- -->
+    <style>
+      :root{
+        --theme:#75fafa;
+        --header2:#072032;
+        --accent1:#effb53;
+        --accent2:#21e4bf;
+      }
+
+      /* -------------------------------------------------------
+        Base styling
+        ------------------------------------------------------- */
+      .simpsec-base-left  { fill: var(--theme);   opacity: 0.95; }
+      .simpsec-base-right { fill: var(--header2); opacity: 0.95; }
+
+      .simpsec-outline{
+        fill: none;
+        stroke: var(--accent1);
+        stroke-width: 1.6;
+        stroke-linejoin: round;
+        vector-effect: non-scaling-stroke;
+      }
+
+      /* -------------------------------------------------------
+        Animation hooks
+        - IMPORTANT: these class names match your site CSS too
+        - But for Option A, they run from inside the SVG file
+        ------------------------------------------------------- */
+      .glitch{
+        transform-origin: 50% 50%;
+        animation: simpsec-glitch-jitter 5.6s infinite;
+      }
+      .glitch .slice-1{ animation: simpsec-glitch-slice-1 5.6s infinite; }
+      .glitch .slice-2{ animation: simpsec-glitch-slice-2 5.6s infinite; }
+      .glitch .slice-3{ animation: simpsec-glitch-slice-3 5.6s infinite; }
+
+      /* Respect reduced motion */
+      @media (prefers-reduced-motion: reduce){
+        .glitch,
+        .glitch .slice-1,
+        .glitch .slice-2,
+        .glitch .slice-3{
+          animation: none !important;
+        }
+      }
+
+      /* -------------------------------------------------------
+        Keyframes (same timing as your CSS)
+        ------------------------------------------------------- */
+      @keyframes simpsec-glitch-jitter{
+        0%, 86%, 100% { transform: translate(0, 0); }
+        87% { transform: translate(0.25px, -0.25px); }
+        88% { transform: translate(-0.25px, 0.25px); }
+        89% { transform: translate(0.25px, 0); }
+        90% { transform: translate(0, 0); }
+      }
+
+      @keyframes simpsec-glitch-slice-1{
+        0%, 86%, 100% { transform: translateX(0); opacity: 0; }
+        87% { transform: translateX(-1.2px); opacity: 0.95; }
+        88% { transform: translateX(1.4px); opacity: 0.75; }
+        89% { transform: translateX(-1.0px); opacity: 0.9; }
+        90% { transform: translateX(0); opacity: 0; }
+      }
+
+      @keyframes simpsec-glitch-slice-2{
+        0%, 86%, 100% { transform: translateX(0); opacity: 0; }
+        87.2% { transform: translateX(1.6px); opacity: 0.6; }
+        88.2% { transform: translateX(-1.4px); opacity: 0.55; }
+        89.2% { transform: translateX(1.0px); opacity: 0.6; }
+        90.2% { transform: translateX(0); opacity: 0; }
+      }
+
+      @keyframes simpsec-glitch-slice-3{
+        0%, 87%, 100% { transform: translateX(0); opacity: 0; }
+        88.0% { transform: translateX(-1.9px); opacity: 0.65; }
+        88.6% { transform: translateX(1.9px); opacity: 0.55; }
+        89.0% { transform: translateX(-1.2px); opacity: 0.6; }
+        89.6% { transform: translateX(0); opacity: 0; }
+      }
+    </style>
+
+    <!-- -------------------------------------------------------
+      Shield with swooping crown (EXACT shape)
+      ------------------------------------------------------- -->
+    <path id="simpsecShieldPath" d="
+      M4.8 5
+      C8.2 3.6 10.4 3 12 2.6
+      C13.6 3 15.8 3.6 19.2 5
+      V11
+      C19.2 16.1 16 19.9 12 21.6
+      C8 19.9 4.8 16.1 4.8 11
+      V5
+      Z
+    " />
+
+    <!-- Clip everything to shield -->
+    <clipPath id="simpsecShieldClip">
+      <use href="#simpsecShieldPath"/>
+    </clipPath>
+
+    <!-- Split halves -->
+    <clipPath id="simpsecLeftHalf">
+      <rect x="0" y="0" width="12" height="24"/>
+    </clipPath>
+    <clipPath id="simpsecRightHalf">
+      <rect x="12" y="0" width="12" height="24"/>
+    </clipPath>
+
+    <!-- Glitch slices (horizontal bars) -->
+    <clipPath id="simpsecSlice1"><rect x="0" y="7.2" width="24" height="1.2"/></clipPath>
+    <clipPath id="simpsecSlice2"><rect x="0" y="10.0" width="24" height="0.9"/></clipPath>
+    <clipPath id="simpsecSlice3"><rect x="0" y="13.0" width="24" height="1.3"/></clipPath>
+  </defs>
+
+  <!-- -------------------------------------------------------
+    Two-tone base (clipped to shield)
+    ------------------------------------------------------- -->
+  <g clip-path="url(#simpsecShieldClip)">
+    <g clip-path="url(#simpsecLeftHalf)">
+      <use href="#simpsecShieldPath" class="simpsec-base-left"/>
+    </g>
+    <g clip-path="url(#simpsecRightHalf)">
+      <use href="#simpsecShieldPath" class="simpsec-base-right"/>
+    </g>
+  </g>
+
+  <!-- -------------------------------------------------------
+    Glitch overlay slices (clipped)
+    ------------------------------------------------------- -->
+  <g class="glitch" clip-path="url(#simpsecShieldClip)">
+    <g class="glitch-slice slice-1" clip-path="url(#simpsecSlice1)">
+      <use href="#simpsecShieldPath" fill="var(--theme)" opacity="0.9"/>
+      <use href="#simpsecShieldPath" fill="var(--header2)" opacity="0.55"/>
+    </g>
+
+    <g class="glitch-slice slice-2" clip-path="url(#simpsecSlice2)">
+      <use href="#simpsecShieldPath" fill="var(--accent2)" opacity="0.65"/>
+    </g>
+
+    <g class="glitch-slice slice-3" clip-path="url(#simpsecSlice3)">
+      <use href="#simpsecShieldPath" fill="var(--accent1)" opacity="0.50"/>
+    </g>
+  </g>
+
+  <!-- -------------------------------------------------------
+    Outline LAST (keeps the swoop crisp)
+    ------------------------------------------------------- -->
+  <use href="#simpsecShieldPath" class="simpsec-outline"/>
+</svg>

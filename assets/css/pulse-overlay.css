@@ -1,0 +1,269 @@
+/* =========================================================
+   SimpSec Pulse Overlay (Animated Open/Close)
+   - Uses opacity + transform for smooth fade/lift
+   - Keeps your existing structure + class name: .is-open
+========================================================= */
+
+.pulse-overlay-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  /* animation-friendly visibility */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
+}
+
+.pulse-overlay-root.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Backdrop */
+.pulse-overlay-root .pulse-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 17, 20, 0.88);
+  backdrop-filter: blur(6px);
+
+  /* fade */
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.pulse-overlay-root.is-open .pulse-backdrop {
+  opacity: 1;
+}
+
+/* Modal wrapper */
+.pulse-overlay-root .pulse-modal {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+
+  /* fade + lift */
+  opacity: 0;
+  transform: translateY(18px) scale(0.98);
+  transition: transform 320ms ease, opacity 320ms ease;
+}
+
+.pulse-overlay-root.is-open .pulse-modal {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+
+  /* subtle polish: backdrop then panel */
+  transition-delay: 60ms;
+}
+
+.pulse-overlay-root .pulse-panel {
+  width: 100%;
+  max-width: 980px;
+  background: #222226;
+  border: 1px solid rgba(207, 208, 212, 0.2);
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+/* ================================
+   Top Bar
+================================ */
+
+.pulse-overlay-root .pulse-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 18px 18px 14px;
+  border-bottom: 1px solid rgba(207, 208, 212, 0.2);
+}
+
+.pulse-overlay-root .pulse-topbar h4 {
+  margin: 0;
+}
+
+.pulse-overlay-root .pulse-mini {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.pulse-overlay-root .pulse-close {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid rgba(207, 208, 212, 0.2);
+  background: transparent;
+  color: var(--white);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ================================
+   Body + Progress
+================================ */
+
+.pulse-overlay-root .pulse-body {
+  padding: 18px;
+  display: grid;
+  gap: 16px;
+}
+
+.pulse-overlay-root .pulse-progress-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.pulse-overlay-root .pulse-progressbar {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--black);
+  min-width: 180px;
+}
+
+.pulse-overlay-root .pulse-progressfill {
+  position: relative;
+  height: 100%;
+  width: 0%;
+
+  background: var(--theme);
+  border-radius: 999px;
+  transition: width 240ms ease;
+  overflow: hidden;
+}
+
+/* Gradient tip */
+.pulse-overlay-root .pulse-progressfill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  width: 150px; /* controls gradient length */
+  height: 100%;
+
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), var(--accent2));
+
+  pointer-events: none;
+}
+
+/* ================================
+   Question Area
+================================ */
+
+.pulse-overlay-root .pulse-question {
+  display: grid;
+  gap: 12px;
+}
+
+.pulse-overlay-root .pulse-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+/* Divider under question */
+.pulse-overlay-root #pcQuestion {
+  margin: 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(207, 208, 212, 0.2);
+}
+
+/* ================================
+   Answers (NO fill animation)
+================================ */
+
+.pulse-overlay-root .pulse-answers {
+  display: grid;
+  gap: 10px;
+}
+
+.pulse-overlay-root .theme-btn.pulse-answer {
+  width: 100%;
+  text-align: left;
+
+  background: rgba(207, 208, 212, 0.1);
+  color: var(--white);
+  border: 1px solid rgba(207, 208, 212, 0.2);
+  border-radius: 20px;
+  padding: 18px 22px;
+
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+/* Kill theme fill animation ONLY for answers */
+.pulse-overlay-root .theme-btn.pulse-answer::after {
+  content: none !important;
+}
+
+.pulse-overlay-root .theme-btn.pulse-answer:hover {
+  background: rgba(207, 208, 212, 0.16);
+  border-color: rgba(207, 208, 212, 0.26);
+  transform: translateY(-1px);
+}
+
+.pulse-overlay-root .theme-btn.pulse-answer:active {
+  transform: translateY(0);
+  background: rgba(207, 208, 212, 0.14);
+}
+
+/* ================================
+   Nav Row
+================================ */
+
+.pulse-overlay-root .pulse-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(207, 208, 212, 0.12);
+  flex-wrap: wrap;
+}
+
+.pulse-overlay-root .pulse-nav .pulse-left {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Category shown on the right side now */
+.pulse-overlay-root .pulse-nav .pulse-nav-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* Nav buttons: black text when active/hover */
+.pulse-overlay-root .pulse-nav .theme-btn:hover,
+.pulse-overlay-root .pulse-nav .theme-btn:active {
+  color: var(--black);
+}
+
+/* ================================
+   Footer note
+================================ */
+
+.pulse-overlay-root .pulse-subnote {
+  font-size: 14px;
+  opacity: 0.85;
+  text-align: center;
+}
+
+body.pulse-lock {
+  overflow: hidden;
+}

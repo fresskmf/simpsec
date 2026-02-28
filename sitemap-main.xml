@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Root pages -->
+  <url>
+    <loc>https://simpsec.wasmer.app/</loc>
+  </url>
+
+  <url><loc>https://simpsec.wasmer.app/about.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/contact.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/faq.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/inquiry.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/login.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/news.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/news-details.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/pricing.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/project.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/project-details.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/register.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/search.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/services.html</loc></url>
+  <url><loc>https://simpsec.wasmer.app/team.html</loc></url>
+
+</urlset>

@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+  <!--<< Header Area >>-->
+
+  <head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="namespace-it" />
+    <meta
+      name="description"
+      content="SimpSec helps small businesses with cybersecurity, AI automation, IT support, and strategic consulting—simple, modern solutions that keep your company secure and efficient."
+    />
+    <!-- ======== Page title ============ -->
+    <title>Inquiry | SIMPSEC</title>
+    <!--<< Favcion >>-->
+    <link rel="shortcut icon" href="assets/img/favicon.svg" />
+    <!--<< Bootstrap min.css >>-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!--<< All Min Css >>-->
+    <link rel="stylesheet" href="assets/css/all.min.css" />
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="assets/css/meanmenu.css" />
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css" />
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="assets/css/nice-select.css" />
+    <!--<< Color.css >>-->
+    <link rel="stylesheet" href="assets/css/color.css" />
+    <!--<< Main.css >>-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+
+  <body class="body-bg">
+    <!-- Preloader Start -->
+    <div id="preloader" class="preloader">
+      <div class="animation-preloader">
+        <div class="spinner"></div>
+        <div class="txt-loading">
+          <span data-text-preloader="S" class="letters-loading"> S </span>
+          <span data-text-preloader="I" class="letters-loading"> I </span>
+          <span data-text-preloader="M" class="letters-loading"> M </span>
+          <span data-text-preloader="P" class="letters-loading"> P </span>
+          <span data-text-preloader="S" class="letters-loading"> S </span>
+          <span data-text-preloader="E" class="letters-loading"> E </span>
+          <span data-text-preloader="C" class="letters-loading"> C </span>
+        </div>
+        <p class="text-center">Loading</p>
+      </div>
+      <div class="loader">
+        <div class="row">
+          <div class="col-3 loader-section section-left">
+            <div class="bg"></div>
+          </div>
+          <div class="col-3 loader-section section-left">
+            <div class="bg"></div>
+          </div>
+          <div class="col-3 loader-section section-right">
+            <div class="bg"></div>
+          </div>
+          <div class="col-3 loader-section section-right">
+            <div class="bg"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--<< Mouse Cursor Start >>-->
+    <div class="mouse-cursor cursor-outer"></div>
+    <div class="mouse-cursor cursor-inner"></div>
+
+    <!-- Back To Top start -->
+    <button id="back-top" class="back-to-top">
+      <i class="fa-regular fa-arrow-up"></i>
+    </button>
+
+    <!-- Nav/offcanvas nav/search -->
+    <div id="site-header"></div>
+
+    <!-- Contact Section Start -->
+    <section
+      class="contact-section fix style-padding section-padding bg-cover"
+      style="background-image: url('assets/img/contact-bg.jpg')"
+    >
+      <div class="container">
+        <div class="section-title ml-200">
+          <h6 class="wow fadeInUp"><img src="assets/img/star.png" alt="img" /> Have an Inquiry?</h6>
+          <h2 class="wow fadeInUp" data-wow-delay=".3s">
+            Let us know
+            <span>
+              and our <br />
+              <i>experts</i> will <b>reach out</b> soon.</span
+            >
+          </h2>
+        </div>
+        <div class="contact-wrapper">
+          <div class="row align-items-center">
+            <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
+              <div class="contact-image">
+                <img src="assets/img/inquiry-image.png" alt="img" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="inquiry-form-items-area">
+                <form
+                  action="inquiry.php"
+                  id="inquiry-form"
+                  method="POST"
+                  action="#"
+                  class="inquiry-form-items"
+                >
+                  <input type="hidden" name="pulse_source" value="" />
+                  <input type="hidden" name="pulse_risk" value="" />
+                  <input type="hidden" name="pulse_score" value="" />
+                  <input type="hidden" name="pulse_gaps" value="" />
+                  <input type="hidden" name="pulse_axis_risk_json" value="" />
+                  <input type="hidden" name="pulse_axes_order_json" value="" />
+                  <input type="hidden" name="inquiry_uid" id="inquiry_uid" value="" />
+
+                  <div class="row g-3">
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        <div class="icon">
+                          <i class="fa-regular fa-user"></i>
+                        </div>
+                        <input type="text" name="first_name" placeholder="First Name" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        <div class="icon">
+                          <i class="fa-regular fa-user"></i>
+                        </div>
+                        <input type="text" name="last_name" placeholder="Last Name" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        <div class="icon">
+                          <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <input type="email" name="email" placeholder="Email Address" required />
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        <div class="icon">
+                          <i class="fa-regular fa-phone"></i>
+                        </div>
+                        <input type="tel" name="phone" placeholder="Phone Number" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        <div class="icon">
+                          <i class="fa-regular fa-building"></i>
+                        </div>
+                        <input type="text" name="company" placeholder="Company Name" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        <div class="icon">
+                          <i class="fa-regular fa-briefcase"></i>
+                        </div>
+                        <input type="text" name="industry" placeholder="Industry" required />
+                      </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <div class="form-clt">
+                        Interested in:
+                        <div class="interest-pills">
+                          <label class="pill">
+                            <input
+                              type="checkbox"
+                              name="interested_in[]"
+                              value="Cybersecurity"
+                              required
+                            />
+                            <span>Cybersecurity</span>
+                          </label>
+                          <label class="pill">
+                            <input type="checkbox" name="interested_in[]" value="AI Tools" />
+                            <span>AI Tools</span>
+                          </label>
+                          <label class="pill">
+                            <input type="checkbox" name="interested_in[]" value="IT Support" />
+                            <span>IT Support</span>
+                          </label>
+                          <label class="pill">
+                            <input type="checkbox" name="interested_in[]" value="Consulting" />
+                            <span>Consulting</span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
+                      <button type="submit" class="theme-btn">Submit</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section Start -->
+    <div id="site-footer"></div>
+    <!--<< All JS Plugins >>-->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!--<< Viewport Js >>-->
+    <script src="assets/js/viewport.jquery.js"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!--<< Nice Select Js >>-->
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <!--<< Waypoints Js >>-->
+    <script src="assets/js/jquery.waypoints.js"></script>
+    <!--<< Counterup Js >>-->
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <!--<< MeanMenu Js >>-->
+    <script src="assets/js/jquery.meanmenu.min.js"></script>
+    <!--<< Magnific Popup Js >>-->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!--<< Wow Animation Js >>-->
+    <script src="assets/js/wow.min.js"></script>
+    <!--<< Ajax Js >>-->
+    <script src="assets/js/ajax-mail.js"></script>
+    <!--<< Includes Js >>-->
+    <script src="/assets/js/includes.js"></script>
+    <!--<< Main.js >>-->
+    <script src="assets/js/main.js"></script>
+    <!--<< pulse results injection js >>-->
+    <script src="assets/js/inquiry-pulse.js"></script>
+    <!--<< inquiry UID js >>-->
+    <script src="assets/js/inquiry-uid.js"></script>
+  </body>
+</html>
