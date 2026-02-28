@@ -1,6 +1,6 @@
 kind: wasmer.io/App.v0
 owner: simpsec
-name: simpsec-site
+name: simpsec
 package: .
 # (optional)
 description: SimpSec website
