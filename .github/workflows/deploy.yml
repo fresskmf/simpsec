@@ -1,0 +1,23 @@
+name: Deploy to Wasmer
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Wasmer
+        run: curl https://get.wasmer.io -sSfL | sh
+
+      - name: Deploy
+        env:
+          WASMER_TOKEN: ${{ secrets.WASMER_TOKEN }}
+        run: |
+          export PATH="$HOME/.wasmer/bin:$PATH"
+          wasmer deploy --non-interactive
