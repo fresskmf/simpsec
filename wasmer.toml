@@ -11,6 +11,8 @@ description = "SimpSec website"
 
 [[command]]
 name = "serve"
-module = "wasmer/static-web-server:static-web-server"
-runner = "wasi"
-args = ["--root", "/public", "--port", "8080"]
+module = "wasmer/static-web-server:webserver"
+runner = "https://webc.org/runner/wasi"
+
+[command.annotations.wasi]
+main-args = ["-p", "8080", "-d", "/public"]
