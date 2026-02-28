@@ -1,6 +1,0 @@
-[package]
-name = "simpsec"
-version = "0.1.0"
-
-[static]
-dir = "."
