@@ -1,10 +1,8 @@
-name: simpsec
-
-app:
-  name: simpsec
-  owner: simpsec
-
-  kind: static
-
-  static:
-    dir: .
+kind: wasmer.io/App.v0
+owner: simpsec
+name: simpsec-site
+package: .
+# (optional)
+description: SimpSec website
+redirect:
+  force_https: true
