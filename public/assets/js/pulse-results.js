@@ -1,5 +1,5 @@
 /* SimpSec Pulse Results (FULL SWAP)
-   - Reads results from localStorage (simpsec_pulse_result_v2)
+   - Reads results from localStorage (simpsec_pulse_result)
    - Populates exposure, band, priorities, radar chart (responsive)
    - Insight + Here's What We Do as dynamic bullet lists based on top gaps
    - "You May Have Experienced This" is dynamic, sorted by highest axis exposure first
@@ -8,7 +8,7 @@
    - No em dashes used
 */
 
-const STORAGE_KEY = 'simpsec_pulse_result_v2';
+const STORAGE_KEY = 'simpsec_pulse_result';
 
 let radarPulsePhase = 0;
 let radarPulseRAF = null;

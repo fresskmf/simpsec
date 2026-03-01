@@ -1,12 +1,12 @@
 /* SimpSec Pulse Results — Digital Footprint
    TODO: Fill in GAP_COPY and EXPERIENCE_BY_RISK_AXES once quiz questions are finalized.
-   - Reads results from localStorage (simpsec_pulse_footprint_v1)
+   - Reads results from localStorage (simpsec_pulse_footprint)
    - Populates exposure, band, priorities, radar chart (responsive)
    - Right-side slider with arrows + dots
    - Radar has slow pulsing glow
 */
 
-const STORAGE_KEY = 'simpsec_pulse_footprint_v1';
+const STORAGE_KEY = 'simpsec_pulse_footprint';
 
 let radarPulsePhase = 0;
 let radarPulseRAF = null;

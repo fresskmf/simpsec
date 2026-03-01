@@ -7,7 +7,7 @@
 window.PULSE_CONFIGS = window.PULSE_CONFIGS || {};
 
 window.PULSE_CONFIGS['footprint'] = {
-  storageKey: 'simpsec_pulse_footprint_v2',
+  storageKey: 'simpsec_pulse_footprint',
   resultsUrl: '/pulse-results-footprint.html',
 
   axesOrder: [

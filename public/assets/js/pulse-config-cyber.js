@@ -6,7 +6,7 @@
 window.PULSE_CONFIGS = window.PULSE_CONFIGS || {};
 
 window.PULSE_CONFIGS['cyber'] = {
-  storageKey: 'simpsec_pulse_result_v2',
+  storageKey: 'simpsec_pulse_result',
   resultsUrl: '/pulse-results.html',
   axesOrder: ['Email', 'Access', 'Backups', 'People', 'Devices', 'Vendors', 'Readiness'],
   questions: [
