@@ -1,127 +1,14 @@
 /* =========================================================
-   SimpSec Pulse Overlay
-   - Overlay only
-   - Safe guards everywhere
-   - No results-page logic
+   SimpSec Pulse Overlay — Config-Driven Engine
+   - Reads quiz config from window.PULSE_CONFIGS[key]
+   - key comes from data-pulse-open="key" (fallback: 'cyber')
+   - Load a config script (e.g. pulse-config-cyber.js) before this file
+   - No results-page logic — engine only
    - FIX: axis normalization + stable axis order for radar
 ========================================================= */
 
-const PULSE_STORAGE_KEY = 'simpsec_pulse_result_v2';
-const RESULTS_PAGE_URL = '/pulse-results.html';
+window.PULSE_CONFIGS = window.PULSE_CONFIGS || {};
 
-/* ---------------------------------------------------------
-   Questions
---------------------------------------------------------- */
-
-const PULSE_QUESTIONS = [
-  {
-    category: 'Email Security',
-    axis: 'Email',
-    text: 'Have you seen suspicious or fake emails recently?',
-    answers: [
-      { label: 'No', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Phishing risk is unclear' },
-      { label: 'Yes', score: 10, gap: 'Phishing incidents are happening' },
-    ],
-  },
-  {
-    category: 'Accounts & Logins',
-    axis: 'Access',
-    text: 'Do all important accounts require a login code from your phone?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Some', score: 5, gap: 'MFA is inconsistent' },
-      { label: 'No', score: 10, gap: 'MFA is missing' },
-    ],
-  },
-  {
-    category: 'Backups & Recovery',
-    axis: 'Backups',
-    text: 'If files were lost today, could you recover them quickly?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Backup/recovery confidence is low' },
-      { label: 'No', score: 10, gap: 'Backups aren’t tested' },
-    ],
-  },
-  {
-    category: 'People',
-    axis: 'People',
-    text: 'Does everyone know what to do if something feels suspicious?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Somewhat', score: 5, gap: 'Team guidance is limited' },
-      { label: 'No', score: 10, gap: 'Incident readiness is low' },
-    ],
-  },
-  {
-    category: 'Devices',
-    axis: 'Devices',
-    text: 'Are work devices consistently updated and protected?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Updates aren’t consistent' },
-      { label: 'No', score: 10, gap: 'Updates aren’t reliably happening' },
-    ],
-  },
-  {
-    category: 'Vendors',
-    axis: 'Vendors',
-    text: 'Do vendors or contractors still have access?',
-    answers: [
-      { label: 'No', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Vendor access is unknown' },
-      { label: 'Yes', score: 10, gap: 'Vendor access isn’t fully controlled' },
-    ],
-  },
-  {
-    category: 'Admin Access',
-    axis: 'Access',
-    text: 'Do you know who has admin-level access?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Admin access is unknown' },
-      { label: 'No', score: 10, gap: 'Admin access needs cleanup' },
-    ],
-  },
-  {
-    category: 'Devices',
-    axis: 'Devices',
-    text: 'Could a lost laptop be locked or wiped quickly?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Device control is inconsistent' },
-      { label: 'No', score: 10, gap: 'Lost-device response is weak' },
-    ],
-  },
-  {
-    category: 'Access',
-    axis: 'Access',
-    text: 'Are shared logins used to get work done?',
-    answers: [
-      { label: 'No', score: 0, gap: null },
-      { label: 'Sometimes', score: 5, gap: 'Shared logins happen' },
-      { label: 'Often', score: 10, gap: 'Shared accounts are common' },
-    ],
-  },
-  {
-    category: 'Readiness',
-    axis: 'Readiness',
-    text: 'Would everyone know what to do during a security issue?',
-    answers: [
-      { label: 'Yes', score: 0, gap: null },
-      { label: 'Not sure', score: 5, gap: 'Incident steps aren’t clear' },
-      { label: 'No', score: 10, gap: 'Incident readiness is low' },
-    ],
-  },
-];
-
-/* ---------------------------------------------------------
-   FIX: stable axis order (radar charts MUST have consistent ordering)
-   - Use this order in results page too.
---------------------------------------------------------- */
-
-const AXES_ORDER = ['Email', 'Access', 'Backups', 'People', 'Devices', 'Vendors', 'Readiness'];
 const MAX_SCORE_PER_QUESTION = 10;
 
 /* ---------------------------------------------------------
@@ -130,6 +17,7 @@ const MAX_SCORE_PER_QUESTION = 10;
 
 let currentIndex = 0;
 let answers = [];
+let activeConfig = null; // set when overlay opens
 
 /* ---------------------------------------------------------
    Overlay DOM builder
@@ -193,7 +81,14 @@ function buildOverlayDOM() {
 let overlayRoot = null;
 let overlayEventsBound = false;
 
-function openOverlay() {
+function openOverlay(key) {
+  const cfg = window.PULSE_CONFIGS[key || 'cyber'];
+  if (!cfg) {
+    console.warn('[Pulse Overlay] No config found for key:', key || 'cyber');
+    return;
+  }
+  activeConfig = cfg;
+
   if (!overlayRoot) overlayRoot = buildOverlayDOM();
 
   if (!overlayEventsBound) {
@@ -205,9 +100,8 @@ function openOverlay() {
 
   restartPulse();
 
-  // Ensure we transition every time (even on first open)
   overlayRoot.classList.remove('is-open');
-  void overlayRoot.offsetHeight; // force reflow
+  void overlayRoot.offsetHeight;
   requestAnimationFrame(() => {
     overlayRoot.classList.add('is-open');
   });
@@ -239,7 +133,8 @@ function bindOverlayEvents() {
 --------------------------------------------------------- */
 
 function renderQuestion() {
-  const q = PULSE_QUESTIONS[currentIndex];
+  if (!activeConfig) return;
+  const q = activeConfig.questions[currentIndex];
   if (!q) return;
 
   const stepEl = document.getElementById('pcStepText');
@@ -250,8 +145,9 @@ function renderQuestion() {
 
   if (!stepEl || !fillEl || !questionEl || !navCatEl || !answersEl) return;
 
-  stepEl.textContent = `Question ${currentIndex + 1} of ${PULSE_QUESTIONS.length}`;
-  fillEl.style.width = `${((currentIndex + 1) / PULSE_QUESTIONS.length) * 100}%`;
+  const total = activeConfig.questions.length;
+  stepEl.textContent = `Question ${currentIndex + 1} of ${total}`;
+  fillEl.style.width = `${((currentIndex + 1) / total) * 100}%`;
 
   questionEl.textContent = q.text;
   navCatEl.innerHTML = `<i class="fa-solid fa-shield-halved"></i><span>${q.category}</span>`;
@@ -272,7 +168,8 @@ function selectAnswer(answer) {
   answers[currentIndex] = answer;
   currentIndex++;
 
-  if (currentIndex >= PULSE_QUESTIONS.length) finishPulse();
+  if (!activeConfig) return;
+  if (currentIndex >= activeConfig.questions.length) finishPulse();
   else renderQuestion();
 }
 
@@ -289,45 +186,41 @@ function restartPulse() {
 }
 
 /* ---------------------------------------------------------
-   FIXED Scoring + Results
-   - Normalizes each axis to 0..100 based on number of questions for that axis
-   - Stores axisRisk in stable AXES_ORDER so radar can render cleanly
+   Scoring + Results
+   - Normalizes each axis to 0..100 based on questions per axis
+   - Stores axisRisk in stable axesOrder so radar renders cleanly
 --------------------------------------------------------- */
 
 function finishPulse() {
-  // raw totals per axis (0..(questions*10))
+  if (!activeConfig) return;
+
+  const { questions, axesOrder, storageKey, resultsUrl } = activeConfig;
+
   const axisRaw = {};
   const gaps = [];
 
   answers.forEach((a, i) => {
-    const q = PULSE_QUESTIONS[i];
+    const q = questions[i];
     if (!q || !a) return;
-
     axisRaw[q.axis] = (axisRaw[q.axis] || 0) + a.score;
     if (a.gap) gaps.push({ gap: a.gap, category: q.category, axis: q.axis });
   });
 
-  // count questions per axis so we can normalize fairly
   const axisQuestionCounts = {};
-  PULSE_QUESTIONS.forEach((q) => {
+  questions.forEach((q) => {
     axisQuestionCounts[q.axis] = (axisQuestionCounts[q.axis] || 0) + 1;
   });
 
-  // normalized 0..100 in stable order
   const axisRisk = {};
-  AXES_ORDER.forEach((axis) => {
+  axesOrder.forEach((axis) => {
     const count = axisQuestionCounts[axis] || 0;
     const maxPossible = count * MAX_SCORE_PER_QUESTION;
     const raw = axisRaw[axis] || 0;
-
-    // If an axis isn't used (count=0), keep it at 0.
     const pct = maxPossible > 0 ? Math.round((raw / maxPossible) * 100) : 0;
-
     axisRisk[axis] = Math.max(0, Math.min(100, pct));
   });
 
-  // overall score = average exposure across axes in the defined order
-  const usedAxes = AXES_ORDER.filter((a) => (axisQuestionCounts[a] || 0) > 0);
+  const usedAxes = axesOrder.filter((a) => (axisQuestionCounts[a] || 0) > 0);
   const avg =
     usedAxes.length > 0
       ? usedAxes.reduce((sum, a) => sum + (axisRisk[a] || 0), 0) / usedAxes.length
@@ -340,19 +233,18 @@ function finishPulse() {
   else if (score >= 55) band = 'High';
   else if (score >= 35) band = 'Medium';
 
-  // Optional: keep top gaps unique (avoid duplicates if axes repeat)
   const topGaps = gaps.slice(0, 5);
 
   const result = {
     score,
     band,
-    axesOrder: AXES_ORDER, // <— important for results page plotting
-    axisRisk, // normalized 0..100 in stable order
+    axesOrder,
+    axisRisk,
     topGaps,
   };
 
-  localStorage.setItem(PULSE_STORAGE_KEY, JSON.stringify(result));
-  window.location.href = RESULTS_PAGE_URL;
+  localStorage.setItem(storageKey, JSON.stringify(result));
+  window.location.href = resultsUrl;
 }
 
 /* ---------------------------------------------------------
@@ -363,7 +255,8 @@ document.addEventListener('click', (e) => {
   const trigger = e.target.closest('[data-pulse-open]');
   if (!trigger) return;
   e.preventDefault();
-  openOverlay();
+  const key = trigger.dataset.pulseOpen || 'cyber';
+  openOverlay(key);
 });
 
 console.log('[Pulse Overlay] Loaded:', window.location.pathname);
