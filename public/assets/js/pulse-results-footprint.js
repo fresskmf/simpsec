@@ -55,53 +55,113 @@ function setList(el, items) {
    TODO: Populate once quiz questions are finalized.
 ------------------------ */
 const GAP_COPY = {
-  'Password reuse is common': {
-    insight: 'Reusing passwords means one breach can compromise all your accounts.',
-    action: 'We help you set up a password manager and secure every account individually.',
+  'Personal details appear in search results': {
+    insight: 'More personal information is visible in search results than most people expect.',
+    action:
+      'We review what appears under your name and remove or reduce what should not be publicly accessible.',
   },
-  'Password reuse is occasional': {
-    insight: 'Even occasional reuse creates a chain — one leaked password can unlock others.',
-    action: 'We identify shared passwords and help you replace them safely.',
+
+  'Search exposure is unknown': {
+    insight: 'If you have never searched yourself, you may not realize what is publicly visible.',
+    action: 'We run a full visibility check and show you exactly what others can see.',
   },
-  'Social profiles are fully public': {
-    insight: 'Public profiles give attackers personal details used in targeted scams.',
-    action: 'We review your social exposure and tighten privacy settings.',
+
+  'Personal details appear on public listing sites': {
+    insight:
+      'Websites that list personal details often collect and share that information across many other platforms.',
+    action: 'We identify these listings and submit structured removal requests on your behalf.',
   },
-  'Social exposure is partial': {
-    insight: 'Partial exposure still provides enough info for targeted phishing.',
-    action: 'We audit which accounts are public and recommend what to lock down.',
+
+  'Personal information is widely listed online': {
+    insight:
+      'When personal information appears across multiple sites, it becomes easier to connect details about your life.',
+    action: 'We prioritize high-exposure listings and work to remove or suppress them.',
   },
-  'Devices are unlocked and unprotected': {
-    insight: 'An unlocked device hands full access to anyone who picks it up.',
-    action: 'We configure device locks and encryption so your data stays protected.',
+
+  'Partial social profile visibility': {
+    insight:
+      'Even limited public content can reveal patterns about your routines, interests, or relationships.',
+    action: 'We adjust privacy settings and reduce what is visible to strangers.',
   },
-  'Device lock is inconsistent': {
-    insight: 'Inconsistent locks mean some devices are a single grab away from exposure.',
-    action: 'We standardize device security across all your personal devices.',
+
+  'Social profiles are publicly visible': {
+    insight:
+      'Fully public profiles allow anyone to gather information about you without your knowledge.',
+    action: 'We help lock down visibility while keeping your accounts usable.',
   },
-  'App permissions are overly broad': {
-    insight: 'Overly permissive apps can access your location, contacts, and camera silently.',
-    action: 'We audit your app permissions and remove unnecessary access.',
+
+  'Some exposed accounts may still be vulnerable': {
+    insight: 'If exposed passwords were not fully updated, older credentials may still be usable.',
+    action: 'We identify at-risk accounts and secure them properly.',
   },
-  'App permissions are unclear': {
-    insight: 'Unknown permissions often mean apps have more access than you realize.',
-    action: 'We review your installed apps and simplify permissions.',
+
+  'Possible breach exposure has not been reviewed': {
+    insight:
+      'Many people do not realize their email or passwords have appeared in breach databases.',
+    action: 'We check for exposure and guide you through securing affected accounts.',
   },
-  'Credentials have been exposed in a breach': {
-    insight: 'Exposed credentials can be used to access accounts years after the breach.',
-    action: 'We identify affected accounts and get you secured with fresh credentials.',
+
+  'App data collection may not be fully reviewed': {
+    insight: 'Apps often collect more behavioral information than most people realize.',
+    action: 'We review permissions and reduce unnecessary data collection.',
   },
-  'Breach exposure is unknown': {
-    insight: 'Not knowing if you\'ve been breached is as risky as knowing and doing nothing.',
-    action: 'We run a breach check and help you act on anything that comes up.',
+
+  'Apps may be collecting more personal data than expected': {
+    insight:
+      'Accepting default settings can allow apps to gather ongoing activity and device information.',
+    action: 'We tighten app permissions and limit background tracking.',
   },
-  'Personal files have no backup': {
-    insight: 'Without a backup, a single device failure means permanent data loss.',
-    action: 'We set up automatic backups so your files are safe without thinking about it.',
+
+  'App tracking may not be fully understood': {
+    insight:
+      'When tracking settings are unclear, personal habits and usage patterns may be recorded continuously.',
+    action: 'We audit your most-used apps and simplify tracking controls.',
   },
-  'Personal backups are inconsistent': {
-    insight: 'Inconsistent backups usually means the most recent files are the most at risk.',
-    action: 'We automate your backup process so it happens without manual effort.',
+
+  'Ongoing app tracking may be happening without awareness': {
+    insight: 'Some apps continue collecting data even when not actively in use.',
+    action: 'We identify background tracking and restrict what is unnecessary.',
+  },
+
+  'Personal information may still be shared publicly': {
+    insight: 'If removal steps have not been completed, personal details may still be circulating.',
+    action: 'We locate active listings and reduce how widely your information is shared.',
+  },
+
+  'Public information listings have likely not been addressed': {
+    insight: 'Many public listing sites operate quietly in the background.',
+    action: 'We identify these sites and begin systematic removal requests.',
+  },
+
+  'Location details may be attached to content': {
+    insight: 'Photos and posts can sometimes include hidden location details.',
+    action: 'We adjust device and app settings to limit location exposure.',
+  },
+
+  'Location sharing settings have not been reviewed': {
+    insight:
+      'If location settings have not been reviewed recently, apps may still be sharing more than intended.',
+    action: 'We walk through location controls and reduce unnecessary sharing.',
+  },
+
+  'Inactive accounts may still hold personal data': {
+    insight: 'Old accounts often retain personal information long after they are forgotten.',
+    action: 'We identify unused accounts and guide proper deletion or closure.',
+  },
+
+  'Old accounts may still be storing personal information': {
+    insight: 'Dormant accounts can remain accessible and searchable for years.',
+    action: 'We help close outdated accounts and reduce lingering exposure.',
+  },
+
+  'Online visibility may not be fully understood': {
+    insight: 'Many people underestimate how much of their life can be pieced together online.',
+    action: 'We map out your digital footprint and show where adjustments matter most.',
+  },
+
+  'Personal exposure online may be greater than expected': {
+    insight: 'If you are unsure what others can find, exposure is usually broader than assumed.',
+    action: 'We provide a clear picture of your online presence and reduce unnecessary visibility.',
   },
 };
 
@@ -171,8 +231,14 @@ const EXPERIENCE_BY_RISK_AXES = {
     { axis: 'Passwords', text: 'Multiple accounts compromised from a single password breach' },
     { axis: 'Social', text: 'Reputation damage from an account takeover' },
     { axis: 'Data', text: 'Years of personal data lost with no backup to restore from' },
-    { axis: 'Privacy', text: 'Personal location or routine information used by someone with bad intent' },
-    { axis: 'Devices', text: 'A device used as an entry point into business or financial accounts' },
+    {
+      axis: 'Privacy',
+      text: 'Personal location or routine information used by someone with bad intent',
+    },
+    {
+      axis: 'Devices',
+      text: 'A device used as an entry point into business or financial accounts',
+    },
   ],
 };
 
