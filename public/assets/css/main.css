@@ -8852,6 +8852,7 @@ span {
 .preloader .animation-preloader .txt-loading .letters-loading {
   color: var(--theme);
   position: relative;
+  font-family: 'Baumans', sans-serif;
 }
 .preloader .animation-preloader .txt-loading .letters-loading:nth-child(2):before {
   animation-delay: 0.2s;
@@ -8891,6 +8892,7 @@ span {
   text-transform: uppercase;
   letter-spacing: 8px;
   color: var(--theme);
+  font-family: 'Rubik', sans-serif;
 }
 .preloader .loader {
   position: fixed;
