@@ -8822,8 +8822,9 @@ span {
 .preloader .animation-preloader .spinner {
   animation: spinner 1s infinite linear;
   border-radius: 50%;
-  border: 3px solid rgba(0, 0, 0, 0.2);
-  border-top-color: var(--theme);
+  background: conic-gradient(var(--accent2) 0%, var(--theme) 70%, transparent 70%);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), white calc(100% - 4px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 4px), white calc(100% - 4px));
   height: 9em;
   margin: 0 auto 3.5em auto;
   width: 9em;
@@ -8850,7 +8851,7 @@ span {
   }
 }
 .preloader .animation-preloader .txt-loading .letters-loading {
-  color: var(--theme);
+  color: var(--accent2);
   position: relative;
   font-family: 'Baumans', sans-serif;
 }
@@ -8877,7 +8878,7 @@ span {
 }
 .preloader .animation-preloader .txt-loading .letters-loading::before {
   animation: letters-loading 4s infinite;
-  color: var(--header);
+  color: var(--accent2);
   content: attr(data-text-preloader);
   left: 0;
   opacity: 0;
@@ -8891,7 +8892,7 @@ span {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 8px;
-  color: var(--theme);
+  color: var(--accent2);
   font-family: 'Rubik', sans-serif;
 }
 .preloader .loader {
