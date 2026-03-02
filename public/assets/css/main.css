@@ -4427,9 +4427,9 @@ span {
 }
 @media (max-width: 1024px) {
   .footer-bottom .footer-bottom-wrapper {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
-    justify-content: center;
     text-align: center;
   }
 }
