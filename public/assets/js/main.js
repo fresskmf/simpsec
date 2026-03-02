@@ -32,7 +32,7 @@ CSS TABLE OF CONTENTS
     //>> Mobile Menu Js Start <<//
     $('#mobile-menu').meanmenu({
       meanMenuContainer: '.mobile-menu',
-      meanScreenWidth: '1199',
+      meanScreenWidth: '1640',
       meanExpand: ['<i class="far fa-plus"></i>'],
     });
 
