@@ -27,8 +27,8 @@
   }
 
   // Run immediately when the script is parsed
-  loadInto('site-header', '/public/partials/header.html');
-  loadInto('site-footer', '/public/partials/footer.html');
+  loadInto('site-header', '/partials/header.html');
+  loadInto('site-footer', '/partials/footer.html');
 
   // Let any code re-bind after injection (optional hook)
   try {
