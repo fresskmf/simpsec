@@ -418,6 +418,7 @@ span {
     flex-wrap: nowrap;
     gap: 25px;
     align-items: stretch;
+    width: 100%;
   }
   .about-wrapper .about-items .about-content {
     flex: 1 1 0;
@@ -1570,8 +1571,17 @@ span {
 }
 @media (max-width: 1024px) {
   .message-items .lets-talk-items {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     text-align: center;
+  }
+  .message-items .lets-circle {
+    flex-shrink: 0;
+    padding: 85px 62px;
+  }
+  .message-items .lets-talk-items p {
+    flex: 1;
+    min-width: 0;
+    max-width: none;
   }
 }
 .message-items .lets-talk-items p {
@@ -12142,12 +12152,14 @@ mark.search-hit {
 }
 .hero-bg-slide:nth-child(3) {
   animation-delay: 10s;
+  background-position: center 60%;
 }
 .hero-bg-slide:nth-child(4) {
   animation-delay: 15s;
 }
 .hero-bg-slide:nth-child(5) {
   animation-delay: 20s;
+  background-position: center 35%;
 }
 .hero-content-slide {
   position: absolute;
