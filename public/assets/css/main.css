@@ -2564,7 +2564,11 @@ span {
   position: absolute;
   left: 270px;
   top: -150px;
-  z-index: -1;
+  z-index: 0;
+}
+.faq-section .container {
+  position: relative;
+  z-index: 1;
 }
 .faq-section .faq-image-banner {
   margin-top: 30px;
@@ -8851,7 +8855,7 @@ span {
   }
 }
 .preloader .animation-preloader .txt-loading .letters-loading {
-  color: var(--accent2);
+  color: var(--theme);
   position: relative;
   font-family: 'Baumans', sans-serif;
 }
@@ -8878,7 +8882,7 @@ span {
 }
 .preloader .animation-preloader .txt-loading .letters-loading::before {
   animation: letters-loading 4s infinite;
-  color: var(--accent2);
+  color: #000;
   content: attr(data-text-preloader);
   left: 0;
   opacity: 0;
@@ -12176,28 +12180,34 @@ mark.search-hit {
   transform: translate(-50%, -50%);
   z-index: 1;
   opacity: 0;
-  animation: heroFade 25s infinite;
+  animation: heroTextFade 25s infinite;
   text-align: center;
   width: 100%;
   padding: 0 1.5rem;
   pointer-events: none;
 }
 @keyframes heroFade {
-  0% {
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  20% {
-    opacity: 1;
-  }
-  28% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
+  0% { opacity: 0; }
+  8% { opacity: 1; }
+  20% { opacity: 1; }
+  28% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes heroTextFade {
+  0% { opacity: 0; }
+  8% { opacity: 1; }
+  16% { opacity: 1; }
+  20% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes letterFadeIn {
+  0% { opacity: 0; }
+  5% { opacity: 1; }
+  100% { opacity: 1; }
+}
+.hero-letter {
+  display: inline-block;
+  animation: letterFadeIn 25s infinite;
 }
 @media (max-width: 1400px) {
   .hero-section.hero-6 {
