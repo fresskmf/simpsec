@@ -8881,7 +8881,7 @@ span {
   content: attr(data-text-preloader);
   left: 0;
   opacity: 0;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Baumans', sans-serif;
   position: absolute;
   top: -3px;
   transform: rotateY(-90deg);
