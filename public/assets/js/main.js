@@ -539,7 +539,9 @@ CSS TABLE OF CONTENTS
       }
     }
     $(function () {
-      mousecursor();
+      if (window.matchMedia('(pointer: fine)').matches) {
+        mousecursor();
+      }
     });
 
     // auto
