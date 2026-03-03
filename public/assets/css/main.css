@@ -377,6 +377,17 @@ span {
     padding: 15px 19px;
     white-space: nowrap;
   }
+@media (max-width: 480px) {
+  .about-wrapper .nav .nav-item {
+    flex: 1;
+  }
+  .about-wrapper .nav .nav-item .nav-link {
+    font-size: 11px;
+    padding: 12px 6px;
+    width: 100%;
+    text-align: center;
+  }
+}
   .about-wrapper .tab-content {
     width: 100%;
   }
@@ -12235,5 +12246,14 @@ mark.search-hit {
 @media (max-width: 1640px) {
   .mean__menu-wrapper {
     display: none;
+  }
+}
+
+/* iOS Safari doesn't support background-attachment: fixed — disable parallax on touch devices */
+@media (pointer: coarse) {
+  .paralax-image,
+  .paralax-section-2,
+  .cta-discuss-section {
+    background-attachment: scroll;
   }
 }
