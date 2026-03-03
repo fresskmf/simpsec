@@ -12224,7 +12224,7 @@ mark.search-hit {
 }
 @media (max-width: 768px) {
   .hero-section.hero-6 {
-    height: 230px;
+    height: clamp(230px, calc(40vw + 80px), 380px);
   }
   .hero-content-slide h1 {
     font-size: 1.7rem;
