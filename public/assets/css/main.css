@@ -507,6 +507,11 @@ span {
 .about-section .about-image-33 {
   margin-top: 30px;
 }
+@media (max-width: 991px) {
+  .about-section .about-image-33 {
+    margin-bottom: 40px;
+  }
+}
 .about-section .about-image-33 img {
   width: 100%;
   height: 100%;
@@ -2235,7 +2240,7 @@ span {
 }
 
 .benefit-wrapper .benefit-left-content .theme-btn {
-  background-color: var(--theme);
+  background-color: var(--accent1);
   color: var(--header);
   margin-top: 50px;
 }
@@ -2271,6 +2276,16 @@ span {
 }
 .benefit-wrapper .benefit-right-items .benefit-icon-items .content h3 {
   margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+  .benefit-wrapper .benefit-left-content {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .benefit-wrapper .benefit-left-content .theme-btn {
+    display: inline-block;
+  }
 }
 
 .cta-discuss-section {
@@ -12246,6 +12261,34 @@ mark.search-hit {
 @media (max-width: 1640px) {
   .mean__menu-wrapper {
     display: none;
+  }
+}
+
+/* Center footer newsletter when stacked (below lg) */
+@media (max-width: 991px) {
+  .footer-widgets-wrapper .single-footer-widget .footer-content {
+    text-align: center;
+  }
+  .footer-widgets-wrapper .single-footer-widget .footer-content .footer-input {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* How It Works subtitle — reduce size/weight below 1400px so it doesn't compete with the h2 title */
+@media (max-width: 1399px) {
+  .how-it-works-section .section-title h3 {
+    font-size: 18px;
+    font-weight: 400;
+  }
+}
+
+/* How It Works — force 2 per row below 1400px */
+@media (max-width: 1399px) {
+  .how-it-works-section .how-it-works-items {
+    flex: 0 0 calc(50% - 15px);
+    max-width: calc(50% - 15px);
   }
 }
 
