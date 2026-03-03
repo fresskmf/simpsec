@@ -1,18 +1,104 @@
 // ==============================
 // SEARCH CONFIG
 // ==============================
-const SEARCH_SOURCES = [
-  { url: "faq.html", type: "FAQ", icon: "fa-solid fa-circle-question" },
- { url: "services.html", type: "Page", icon: "fa-solid fa-grid-2" },
- { url: "cybersecurity.html", type: "Service", icon: "fa-solid fa-file-lines" },
- { url: "ai-tools.html", type: "Service", icon: "fa-solid fa-wand-magic-sparkles" },
- { url: "it-support.html", type: "Service", icon: "fa-solid fa-laptop" },
- { url: "consulting.html", type: "Service", icon: "fa-solid fa-lightbulb" },
- { url: "pricing.html", type: "Page", icon: "fa-solid fa-tags" },
- { url: "about.html", type: "Page", icon: "fa-solid fa-users" },
- { url: "contact.html", type: "Page", icon: "fa-solid fa-envelope" }
 
-];
+// Sitemap is the source of truth for which pages exist.
+// Add a page to sitemap.xml and it automatically appears in search.
+const SITEMAP_URL = "/sitemap.xml";
+
+// Per-page icon overrides keyed by full relative URL.
+// Add new entries here only when you want a specific icon.
+const PAGE_ICONS = {
+  "index.html":                                              "fa-solid fa-house",
+  "about.html":                                             "fa-solid fa-users",
+  "services.html":                                          "fa-solid fa-grid-2",
+  "pricing.html":                                           "fa-solid fa-tags",
+  "pricing-preventative.html":                              "fa-solid fa-shield-halved",
+  "pricing-rapid-response.html":                            "fa-solid fa-bolt",
+  "news.html":                                              "fa-solid fa-newspaper",
+  "contact.html":                                           "fa-solid fa-envelope",
+  "inquiry.html":                                           "fa-solid fa-clipboard-list",
+  "faq.html":                                               "fa-solid fa-circle-question",
+  "cybersecurity.html":                                     "fa-solid fa-shield",
+  "it-support.html":                                        "fa-solid fa-laptop",
+  "ai-automation.html":                                     "fa-solid fa-wand-magic-sparkles",
+  "consulting.html":                                        "fa-solid fa-lightbulb",
+  "cybersecurity/risk-assessment.html":                     "fa-solid fa-magnifying-glass-chart",
+  "cybersecurity/access-control-account-security.html":     "fa-solid fa-lock",
+  "cybersecurity/security-monitoring-threat-detection.html":"fa-solid fa-radar",
+  "cybersecurity/ai-application-security-testing.html":     "fa-solid fa-flask",
+  "cybersecurity/incident-response-recovery.html":          "fa-solid fa-triangle-exclamation",
+  "cybersecurity/security-policies-governance.html":        "fa-solid fa-file-shield",
+  "it-support/managed-it.html":                             "fa-solid fa-server",
+  "it-support/it-support.html":                             "fa-solid fa-headset",
+  "it-support/onsite-support.html":                         "fa-solid fa-location-dot",
+  "it-support/user-lifecycle.html":                         "fa-solid fa-user-gear",
+  "it-support/identity-permissions-cleanup.html":           "fa-solid fa-user-lock",
+  "it-support/reporting-dashboards.html":                   "fa-solid fa-chart-bar",
+  "ai-automation/workflow-automation.html":                 "fa-solid fa-diagram-project",
+  "ai-automation/ai-chatbots.html":                         "fa-solid fa-robot",
+  "ai-automation/ai-intake-forms.html":                     "fa-solid fa-wpforms",
+  "ai-automation/analytics-forecasting.html":               "fa-solid fa-chart-line",
+  "ai-automation/automation-monitoring-support.html":       "fa-solid fa-gauge",
+  "ai-automation/custom-ai-assistants.html":                "fa-solid fa-microchip",
+  "consulting/security-it-roadmapping.html":                "fa-solid fa-map",
+  "consulting/ai-automation-strategy.html":                 "fa-solid fa-chess",
+  "consulting/vendor-tool-selection.html":                  "fa-solid fa-sliders",
+  "consulting/process-improvement-workshops.html":          "fa-solid fa-chalkboard-user",
+  "consulting/architecture-implementation-planning.html":   "fa-solid fa-sitemap",
+  "consulting/ongoing-advisory.html":                       "fa-solid fa-comments",
+  "personal/digital-footprint-recovery.html":               "fa-solid fa-user-shield",
+};
+
+// Infer type + fallback icon from the URL path
+function classifyUrl(relUrl) {
+  if (/faq\.html$/.test(relUrl))
+    return { type: "FAQ", icon: "fa-solid fa-circle-question" };
+  if (/^(cybersecurity|it-support|ai-automation|consulting)(\/|\.html)/.test(relUrl) ||
+      /^personal\//.test(relUrl))
+    return { type: "Service", icon: iconForSection(relUrl) };
+  return { type: "Page", icon: "fa-solid fa-file-lines" };
+}
+
+function iconForSection(path) {
+  if (path.startsWith("cybersecurity")) return "fa-solid fa-shield";
+  if (path.startsWith("it-support"))    return "fa-solid fa-laptop";
+  if (path.startsWith("ai-automation")) return "fa-solid fa-wand-magic-sparkles";
+  if (path.startsWith("consulting"))    return "fa-solid fa-lightbulb";
+  if (path.startsWith("personal"))      return "fa-solid fa-user-shield";
+  return "fa-solid fa-file-lines";
+}
+
+// Fetch sitemap.xml (handles both flat urlset and sitemapindex)
+async function loadSources() {
+  const res = await fetch(SITEMAP_URL, { cache: "no-store" });
+  const text = await res.text();
+  const xml = new DOMParser().parseFromString(text, "application/xml");
+
+  let fullUrls = [];
+
+  if (xml.querySelector("sitemapindex")) {
+    // Index sitemap — fetch each child sitemap
+    const childLocs = Array.from(xml.querySelectorAll("sitemap > loc"))
+      .map(n => n.textContent.trim());
+    for (const childUrl of childLocs) {
+      try {
+        const r = await fetch(childUrl, { cache: "no-store" });
+        const cx = new DOMParser().parseFromString(await r.text(), "application/xml");
+        cx.querySelectorAll("url > loc").forEach(n => fullUrls.push(n.textContent.trim()));
+      } catch (e) { console.warn("Sub-sitemap fetch failed:", childUrl); }
+    }
+  } else {
+    fullUrls = Array.from(xml.querySelectorAll("url > loc"))
+      .map(n => n.textContent.trim());
+  }
+
+  return fullUrls.map(fullUrl => {
+    const relUrl = fullUrl.replace(/^https?:\/\/[^/]+\//, "") || "index.html";
+    const { type, icon: fallback } = classifyUrl(relUrl);
+    return { url: relUrl, type, icon: PAGE_ICONS[relUrl] || fallback };
+  });
+}
 
 // ==============================
 // FILTER CONFIG
@@ -353,12 +439,13 @@ function buildFaqEntries(doc, source) {
 }
 
 async function buildIndex() {
+  const sources = await loadSources();
   const all = [];
 
-  for (const source of SEARCH_SOURCES) {
+  for (const source of sources) {
     try {
       const doc = await fetchDoc(source.url);
-      if (source.url === "faq.html") {
+      if (source.type === "FAQ") {
         all.push(...buildFaqEntries(doc, source));
       } else {
         all.push(...buildPageEntry(doc, source));

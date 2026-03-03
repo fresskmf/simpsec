@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://simpsec.wasmer.app/sitemap-main.xml</loc>
-    <lastmod>2026-01-15</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://simpsec.wasmer.app/sitemap-cybersecurity.xml</loc>
-    <lastmod>2026-01-15</lastmod>
-  </sitemap>
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ── Core pages ──────────────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/</loc>                                                       <lastmod>2026-03-02</lastmod><changefreq>weekly</changefreq> <priority>1.0</priority></url>
+  <url><loc>https://simpsec.wasmer.app/about.html</loc>                                             <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/services.html</loc>                                          <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/pricing.html</loc>                                           <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/pricing-preventative.html</loc>                              <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/pricing-rapid-response.html</loc>                            <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/faq.html</loc>                                               <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://simpsec.wasmer.app/news.html</loc>                                              <lastmod>2026-03-02</lastmod><changefreq>weekly</changefreq> <priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/contact.html</loc>                                           <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/inquiry.html</loc>                                           <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ── Cybersecurity ─────────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/cybersecurity.html</loc>                                     <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity/risk-assessment.html</loc>                     <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity/access-control-account-security.html</loc>     <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity/security-monitoring-threat-detection.html</loc><lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity/ai-application-security-testing.html</loc>     <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity/incident-response-recovery.html</loc>          <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/cybersecurity/security-policies-governance.html</loc>        <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ── IT Support ────────────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/it-support.html</loc>                                        <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/it-support/managed-it.html</loc>                             <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/it-support/it-support.html</loc>                             <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/it-support/onsite-support.html</loc>                         <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/it-support/user-lifecycle.html</loc>                         <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/it-support/identity-permissions-cleanup.html</loc>           <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/it-support/reporting-dashboards.html</loc>                   <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ── AI & Automation ───────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/ai-automation.html</loc>                                     <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/ai-automation/workflow-automation.html</loc>                 <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/ai-automation/ai-chatbots.html</loc>                         <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/ai-automation/ai-intake-forms.html</loc>                     <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/ai-automation/analytics-forecasting.html</loc>               <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/ai-automation/automation-monitoring-support.html</loc>       <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/ai-automation/custom-ai-assistants.html</loc>                <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ── Consulting ────────────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/consulting.html</loc>                                        <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://simpsec.wasmer.app/consulting/security-it-roadmapping.html</loc>                <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/consulting/ai-automation-strategy.html</loc>                 <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/consulting/vendor-tool-selection.html</loc>                  <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/consulting/process-improvement-workshops.html</loc>          <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/consulting/architecture-implementation-planning.html</loc>   <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://simpsec.wasmer.app/consulting/ongoing-advisory.html</loc>                       <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ── Personal ──────────────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/personal/digital-footprint-recovery.html</loc>               <lastmod>2026-03-02</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
+  <!-- ── Legal ─────────────────────────────────────────────── -->
+  <url><loc>https://simpsec.wasmer.app/legal/privacy-policy.html</loc>                              <lastmod>2026-03-02</lastmod><changefreq>yearly</changefreq> <priority>0.3</priority></url>
+  <url><loc>https://simpsec.wasmer.app/legal/terms-of-service.html</loc>                            <lastmod>2026-03-02</lastmod><changefreq>yearly</changefreq> <priority>0.3</priority></url>
+
+</urlset>
