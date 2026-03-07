@@ -377,17 +377,17 @@ span {
     padding: 15px 19px;
     white-space: nowrap;
   }
-@media (max-width: 480px) {
-  .about-wrapper .nav .nav-item {
-    flex: 1;
+  @media (max-width: 480px) {
+    .about-wrapper .nav .nav-item {
+      flex: 1;
+    }
+    .about-wrapper .nav .nav-item .nav-link {
+      font-size: 11px;
+      padding: 12px 6px;
+      width: 100%;
+      text-align: center;
+    }
   }
-  .about-wrapper .nav .nav-item .nav-link {
-    font-size: 11px;
-    padding: 12px 6px;
-    width: 100%;
-    text-align: center;
-  }
-}
   .about-wrapper .tab-content {
     width: 100%;
   }
@@ -8853,7 +8853,11 @@ span {
   animation: spinner 1s infinite linear;
   border-radius: 50%;
   background: conic-gradient(var(--accent2) 0%, var(--theme) 70%, transparent 70%);
-  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), white calc(100% - 4px));
+  -webkit-mask: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 4px),
+    white calc(100% - 4px)
+  );
   mask: radial-gradient(farthest-side, transparent calc(100% - 4px), white calc(100% - 4px));
   height: 9em;
   margin: 0 auto 3.5em auto;
@@ -12213,23 +12217,49 @@ mark.search-hit {
   pointer-events: none;
 }
 @keyframes heroFade {
-  0% { opacity: 0; }
-  8% { opacity: 1; }
-  20% { opacity: 1; }
-  28% { opacity: 0; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  28% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 @keyframes heroTextFade {
-  0% { opacity: 0; }
-  8% { opacity: 1; }
-  16% { opacity: 1; }
-  20% { opacity: 0; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  16% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 @keyframes letterFadeIn {
-  0% { opacity: 0; }
-  5% { opacity: 1; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .hero-letter {
   display: inline-block;
@@ -12299,4 +12329,15 @@ mark.search-hit {
   .cta-discuss-section {
     background-attachment: scroll;
   }
+}
+
+/* ── Inquiry form extras ──────────────────────────────────────────────────── */
+
+/* Honeypot field: visually hidden from real users, bots still fill it */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
