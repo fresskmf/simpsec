@@ -104,7 +104,7 @@ async function getSalesforceToken() {
   }
 
   const loginUrl   = process.env.SF_LOGIN_URL || 'https://login.salesforce.com';
-  const privateKey = process.env.SF_PRIVATE_KEY.replace(/\\n/g, '\n');
+  const privateKey = Buffer.from(process.env.SF_PRIVATE_KEY, 'base64').toString('utf8');
   const jwt        = buildJWT(process.env.SF_CLIENT_ID, process.env.SF_USERNAME, loginUrl, privateKey);
 
   const body = querystring.stringify({
