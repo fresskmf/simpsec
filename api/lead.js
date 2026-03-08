@@ -86,9 +86,10 @@ function buildJWT(clientId, username, audience, privateKeyPem) {
   const now     = Math.floor(Date.now() / 1000);
   const payload = base64url(JSON.stringify({ iss: clientId, sub: username, aud: audience, exp: now + 180 }));
   const signing = `${header}.${payload}`;
-  const sign    = crypto.createSign('RSA-SHA256');
+  const keyObject = crypto.createPrivateKey({ key: privateKeyPem, format: 'pem' });
+  const sign      = crypto.createSign('RSA-SHA256');
   sign.update(signing);
-  const sig = sign.sign(privateKeyPem, 'base64')
+  const sig = sign.sign(keyObject, 'base64')
     .replace(/\+/g, '-')
     .replace(/\//g, '_')
     .replace(/=/g, '');
