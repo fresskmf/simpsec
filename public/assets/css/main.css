@@ -1897,6 +1897,18 @@ span {
 .contact-wrapper .contact-form-items-area .contact-form-items .form-clt .nice-select .option.disabled {
   display: none;
 }
+.contact-wrapper .contact-form-items-area .contact-form-items .form-message {
+  margin-top: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  min-height: 1em;
+}
+.contact-wrapper .contact-form-items-area .contact-form-items .form-message.success {
+  color: #4caf87;
+}
+.contact-wrapper .contact-form-items-area .contact-form-items .form-message.error {
+  color: #e05c5c;
+}
 .contact-wrapper .contact-form-items-area .contact-form-items .theme-btn {
   background-color: var(--accent1);
   color: var(--header);

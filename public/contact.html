@@ -264,6 +264,9 @@
                         Send message <i class="fa-sharp fa-regular fa-arrow-up-right"></i>
                       </button>
                     </div>
+                    <div class="col-lg-12">
+                      <p class="form-message"></p>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -312,8 +315,13 @@
     <script src="assets/js/jquery.magnific-popup.min.js"></script>
     <!--<< Wow Animation Js >>-->
     <script src="assets/js/wow.min.js"></script>
+    <!--<< Main.js >>-->
+    <script src="/assets/js/includes.js"></script>
+    <script src="assets/js/main.js"></script>
     <script>
+      // Runs after main.js so nice-select is already initialized
       $(document).ready(function () {
+
         // Elevate open nice-select column above subsequent rows
         $('.contact-form-items .nice-select').each(function () {
           var el = this;
@@ -323,24 +331,61 @@
           }).observe(el, { attributes: true, attributeFilter: ['class'] });
         });
 
-        // Validate required nice-select fields on submit (browser skips hidden selects).
-        // Must register before ajax-mail.js so stopImmediatePropagation blocks the AJAX handler.
+        // Form submission — validates selects then POSTs JSON to /api/case
         $('#contact-form').on('submit', function (e) {
+          e.preventDefault();
+
           var missing = [];
           if (!$('#subject').val()) missing.push('Request Type');
           if (!$('#severity').val()) missing.push('Severity');
           if (missing.length) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            alert('Please select a value for: ' + missing.join(', '));
+            $('.form-message').removeClass('success').addClass('error')
+              .text('Please select a value for: ' + missing.join(', '));
+            return;
           }
+
+          var msgEl    = $('.form-message');
+          var submitBtn = $(this).find('[type="submit"]');
+          submitBtn.prop('disabled', true);
+          msgEl.removeClass('success error').text('');
+
+          fetch('/api/case', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name:             $('#name').val().trim(),
+              phone:            $('#phone').val().trim(),
+              email:            $('#email12').val().trim(),
+              company:          $('#company').val().trim(),
+              contract_number:  $('#contract_number').val().trim(),
+              subject:          $('#subject').val(),
+              affected_service: $('#affected_service').val().trim(),
+              severity:         $('#severity').val(),
+              message:          $('#message').val().trim(),
+            }),
+          })
+          .then(function (res) {
+            return res.text().then(function (text) {
+              return { ok: res.ok, text: text };
+            });
+          })
+          .then(function (result) {
+            if (result.ok) {
+              msgEl.removeClass('error').addClass('success').text(result.text);
+              $('#contact-form input, #contact-form textarea').val('');
+              $('select.nice-select').val('').niceSelect('update');
+            } else {
+              msgEl.removeClass('success').addClass('error').text(result.text || 'Something went wrong. Please try again.');
+              submitBtn.prop('disabled', false);
+            }
+          })
+          .catch(function () {
+            msgEl.removeClass('success').addClass('error')
+              .text('Something went wrong. Please try again or email support@simpsec.org.');
+            submitBtn.prop('disabled', false);
+          });
         });
       });
     </script>
-    <!--<< Ajax Js >>-->
-    <script src="assets/js/ajax-mail.js"></script>
-    <!--<< Main.js >>-->
-    <script src="/assets/js/includes.js"></script>
-    <script src="assets/js/main.js"></script>
   </body>
 </html>
