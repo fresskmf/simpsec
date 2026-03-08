@@ -110,8 +110,9 @@ async function getSalesforceToken() {
     password:      process.env.SF_PASSWORD + process.env.SF_SECURITY_TOKEN,
   });
 
+  const loginUrl = process.env.SF_LOGIN_URL || 'https://login.salesforce.com';
   const { statusCode, body: raw } = await httpsPost(
-    'https://login.salesforce.com/services/oauth2/token',
+    `${loginUrl}/services/oauth2/token`,
     {
       'Content-Type':   'application/x-www-form-urlencoded',
       'Content-Length': Buffer.byteLength(body),
