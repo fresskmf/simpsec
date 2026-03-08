@@ -207,6 +207,7 @@ module.exports = async function handler(req, res) {
   }
 
   const descParts = [];
+  if (interest)   descParts.push(`Interested in: ${interest}`);
   if (pulseRisk || pulseScore) {
     descParts.push(`Pulse Check: ${pulseRisk || 'n/a'} (score: ${pulseScore || 'n/a'}) — see related Pulse Check record`);
   }
@@ -224,7 +225,6 @@ module.exports = async function handler(req, res) {
       Industry:    industry || '',
       Description: descParts.join('\n'),
       LeadSource:  'SimpSec Website',
-      Interest__c: interest || '',
     });
 
     console.log(`[/api/lead] Lead created: ${leadId}`);
