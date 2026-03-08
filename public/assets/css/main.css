@@ -1894,6 +1894,9 @@ span {
   font-weight: 500;
   border: none;
 }
+.contact-wrapper .contact-form-items-area .contact-form-items .form-clt .nice-select .option.disabled {
+  display: none;
+}
 .contact-wrapper .contact-form-items-area .contact-form-items .theme-btn {
   background-color: var(--accent1);
   color: var(--header);

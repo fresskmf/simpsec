@@ -36,22 +36,40 @@ function respond($ok, $message, $httpCode = 200) {
 }
 
 // --- Read & sanitize inputs ---
-$name    = isset($_POST["name"]) ? trim($_POST["name"]) : "";
-$phone   = isset($_POST["phone"]) ? trim($_POST["phone"]) : "";
-$email   = isset($_POST["email"]) ? trim($_POST["email"]) : "";
-$subject = isset($_POST["subject"]) ? trim($_POST["subject"]) : "General Inquiry";
-$message = isset($_POST["message"]) ? trim($_POST["message"]) : "";
+$name            = isset($_POST["name"])             ? trim($_POST["name"])             : "";
+$phone           = isset($_POST["phone"])            ? trim($_POST["phone"])            : "";
+$email           = isset($_POST["email"])            ? trim($_POST["email"])            : "";
+$company         = isset($_POST["company"])          ? trim($_POST["company"])          : "";
+$contract_number = isset($_POST["contract_number"])  ? trim($_POST["contract_number"])  : "";
+$subject         = isset($_POST["subject"])          ? trim($_POST["subject"])          : "";
+$affected_service= isset($_POST["affected_service"]) ? trim($_POST["affected_service"]) : "";
+$severity        = isset($_POST["severity"])         ? trim($_POST["severity"])         : "";
+$message         = isset($_POST["message"])          ? trim($_POST["message"])          : "";
 
 // Basic cleanup
-$name = strip_tags($name);
-$name = str_replace(["\r", "\n"], " ", $name);
-$subject = strip_tags($subject);
-$subject = str_replace(["\r", "\n"], " ", $subject);
-$phone = strip_tags($phone);
+$name             = strip_tags($name);
+$name             = str_replace(["\r", "\n"], " ", $name);
+$company          = strip_tags($company);
+$company          = str_replace(["\r", "\n"], " ", $company);
+$contract_number  = strip_tags($contract_number);
+$contract_number  = str_replace(["\r", "\n"], " ", $contract_number);
+$subject          = strip_tags($subject);
+$subject          = str_replace(["\r", "\n"], " ", $subject);
+$affected_service = strip_tags($affected_service);
+$affected_service = str_replace(["\r", "\n"], " ", $affected_service);
+$severity         = strip_tags($severity);
+$severity         = str_replace(["\r", "\n"], " ", $severity);
+$phone            = strip_tags($phone);
 
 // --- Validate required fields ---
-if ($name === "" || $message === "" || $email === "") {
-  respond(false, "Please complete your name, email, and message.", 422);
+if ($name === "" || $message === "" || $email === "" || $company === "") {
+  respond(false, "Please complete your name, email, company, and message.", 422);
+}
+if ($subject === "") {
+  respond(false, "Please select a Request Type.", 422);
+}
+if ($severity === "") {
+  respond(false, "Please select a Severity level.", 422);
 }
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -64,14 +82,20 @@ if (preg_match("/[\r\n]/", $email)) {
 }
 
 // --- Build email ---
-$emailSubject = "SimpSec Contact: {$subject} — {$name}";
+$subjectLabel = $subject !== "" ? $subject : "General";
+$emailSubject = "SimpSec Support [{$severity ?: 'No Severity'}]: {$subjectLabel} — {$name} ({$company})";
 
-$emailBody  = "New contact form submission\n";
+$emailBody  = "New support request\n";
 $emailBody .= "----------------------------------------\n";
-$emailBody .= "Name:    {$name}\n";
-$emailBody .= "Email:   {$email}\n";
-$emailBody .= "Phone:   " . ($phone !== "" ? $phone : "(not provided)") . "\n";
-$emailBody .= "Subject: {$subject}\n";
+$emailBody .= "Name:             {$name}\n";
+$emailBody .= "Email:            {$email}\n";
+$emailBody .= "Phone:            " . ($phone !== "" ? $phone : "(not provided)") . "\n";
+$emailBody .= "Company:          {$company}\n";
+$emailBody .= "MSA Contract #:   " . ($contract_number !== "" ? $contract_number : "(not provided)") . "\n";
+$emailBody .= "----------------------------------------\n";
+$emailBody .= "Request Type:     " . ($subject !== "" ? $subject : "(not selected)") . "\n";
+$emailBody .= "Affected Service: " . ($affected_service !== "" ? $affected_service : "(not provided)") . "\n";
+$emailBody .= "Severity:         " . ($severity !== "" ? $severity : "(not selected)") . "\n";
 $emailBody .= "----------------------------------------\n\n";
 $emailBody .= $message . "\n";
 
